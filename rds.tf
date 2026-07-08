@@ -25,14 +25,14 @@ resource "aws_db_instance" "this" {
   vpc_security_group_ids = [var.rds_sg_id]
   publicly_accessible    = false # must only be reachable from ECS/Fargate SG
 
-  multi_az                        = var.multi_az
-  backup_retention_period         = var.backup_retention_period
-  backup_window                   = "03:00-04:00"
-  maintenance_window               = "mon:04:30-mon:05:30"
-  deletion_protection               = var.deletion_protection
-  skip_final_snapshot                 = !var.deletion_protection
-  final_snapshot_identifier             = var.deletion_protection ? "${local.resource_name}-final-snapshot" : null
-  copy_tags_to_snapshot                    = true
+  multi_az                  = var.multi_az
+  backup_retention_period   = var.backup_retention_period
+  backup_window             = "03:00-04:00"
+  maintenance_window        = "mon:04:30-mon:05:30"
+  deletion_protection       = var.deletion_protection
+  skip_final_snapshot       = !var.deletion_protection
+  final_snapshot_identifier = var.deletion_protection ? "${local.resource_name}-final-snapshot" : null
+  copy_tags_to_snapshot     = true
 
   performance_insights_enabled = true
 
